@@ -1,0 +1,186 @@
+---
+title: "Prerequisites"
+output: html_document
+author: Ic3fr0g
+---
+### Install R and RStudio
+
+- [Download and install R](https://ftp.iitm.ac.in/cran/)
+- [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/)
+
+### Install Packages
+
+Open RStudio and type `install.packages(c("ggplot2","data.table","dplyr"))` in the console. The output should look like this:
+```{r}
+# trying URL 'https://cran.rstudio.com/bin/macosx/el-capitan/contrib/3.4/ggplot2_2.2.1.tgz'
+# Content type 'application/x-gzip' length 2792414 bytes (2.7 MB)
+# ==================================================
+# downloaded 2.7 MB
+# 
+# trying URL 'https://cran.rstudio.com/bin/macosx/el-capitan/contrib/3.4/data.table_1.10.4-3.tgz'
+# Content type 'application/x-gzip' length 1430738 bytes (1.4 MB)
+# ==================================================
+# downloaded 1.4 MB
+# 
+# trying URL 'https://cran.rstudio.com/bin/macosx/el-capitan/contrib/3.4/dplyr_0.7.4.tgz'
+# Content type 'application/x-gzip' length 5094432 bytes (4.9 MB)
+# ==================================================
+# downloaded 4.9 MB
+```
+
+### Scalars
+
+R works with numerous data types. Some of the most basic types to get started are:
+- Text (or string) values are called **characters**.
+- Decimals values like `4.5` are called **numerics**.
+- Natural numbers like `4` are called **integers**. Integers are also numerics.
+- Boolean values (`TRUE` or `FALSE`) are called **logical**.
+
+#### Strings
+
+As is customary with every new language one learns, let's learn how to print **"Hello world!"**:
+```{r}
+"Hello world!"
+```
+
+#### Arithmetic
+
+In its most basic form, R can be used as a simple calculator. Consider the following arithmetic operators:
+- Addition: +
+- Subtraction: -
+- Multiplication: *
+- Division: /
+- Exponentiation: ^
+- Modulo: %%
+For example:
+```{r}
+# Remainder when 3 is divided by 2
+3 %% 2
+```
+
+Another interesting thing to point out is that it inherently follows BODMAS:
+```{r}
+# Inherently follows BODMAS
+6 - 7 * 2 / 1 + 3
+```
+
+#### Logical Values
+
+Most programming languages refer to logical values as **boolean values**. Some expressions can return `True` or `False` values:
+```{r}
+3 < 4
+```
+
+The `==` sign checks for equivalence of an expression:
+```{r}
+# == sign checks for equivalence
+2 + 2 == 5
+```
+
+Shorthand for `TRUE` and `FALSE` is given as `T` and `F` respectively:
+```{r}
+T == TRUE
+```
+
+#### Variables
+
+As in other programming languages, you can store values into a variable to access it later:
+```{r}
+# Assign the value 42 to x
+x <- 42
+# Print out the value of the variable x
+x
+```
+
+Variable arithmetic also works but notice that it doesn't change the original value of `x`:
+```{r}
+# Divide x by 21
+x/21
+# Print x
+x
+```
+
+To change the value of `x`, we'd have to do the following:
+```{r}
+# Save the result of x/21 to a variable x
+x <- x/21
+# Print x
+x
+```
+
+Let's assume we have 3 variables where each variable here denotes the number of fruits we bought at the market:
+```{r}
+# Fruits bought at the market
+apples <- 5
+oranges <- 6
+tomatoes <- "ten"
+```
+
+Let's find out the sum of the apples and oranges bought collectively:
+```{r}
+# Sum of apples and oranges
+apples + oranges
+```
+
+What about the sum of the apples and tomatoes ?
+```{r,error=T}
+apples + tomatoes
+```
+**This doesn't work as expected because the two variables(`apples` and `tomatoes`) are of different datatypes(`integer` and `character`).**
+
+### Introduction to Functions and Helpers
+
+Functions exist to perform repeated tasks. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let's see an example of the `sum` function:
+```{r}
+# Sum of 1, 3, 5
+sum(1,3,5)
+```
+```{r}
+# Sum of apples and oranges
+sum(apples, oranges)
+```
+
+Some arguments have names. For example, to repeat a value 3 times, you would call the `rep` function and provide its `times` argument:
+```{r}
+# Repeats "FIRE" 3 times
+rep("FIRE", times = 3)
+```
+
+Most mathematical functions, like `sqrt`, have well defined functions:
+```{r}
+# Square root of 16
+sqrt(16)
+```
+
+#### Helpers
+
+`help(functionname)` brings up help for the given function. Try displaying help for the sum function:
+```{r}
+help(sum)
+# We can also bring up the help file in this way
+?sum
+```
+
+`example(functionname)` brings up examples of usage for the given function. Try displaying examples for the min function:
+```{r}
+example(sum)
+```
+
+Of the most important helper functions used is `class`. It helps us to determine the datatype of the variable:
+```{r}
+class(apples)
+```
+```{r}
+class(tomatoes)
+```
+```{r}
+class(FALSE)
+```
+
+### MISC
+
+Commands are separated either by a semi-colon (`;`), or by a newline. Elementary commands can be grouped together into one compound expression by braces (`{` and `}`). Comments can be put almost anywhere, starting with a hashmark (`#`), everything to the end of the line is a comment.
+```{r}
+# Commands seperated by ;
+x <- 1; y <- 2; x + y
+```
