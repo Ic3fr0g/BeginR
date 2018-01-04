@@ -1,7 +1,9 @@
 ---
-title: "Prerequisites"
-output: html_document
-author: Ic3fr0g
+title: "1. Introduction"
+author: "Ic3fr0g"
+output:
+  html_document: default
+  html_notebook: default
 ---
 ### Install R and RStudio
 
@@ -28,7 +30,7 @@ Open RStudio and type `install.packages(c("ggplot2","data.table","dplyr"))` in t
 # downloaded 4.9 MB
 ```
 
-### Scalars
+## 1.1 Scalars
 
 R works with numerous data types. Some of the most basic types to get started are:
 - Text (or string) values are called **characters**.
@@ -36,14 +38,14 @@ R works with numerous data types. Some of the most basic types to get started ar
 - Natural numbers like `4` are called **integers**. Integers are also numerics.
 - Boolean values (`TRUE` or `FALSE`) are called **logical**.
 
-#### Strings
+#### 1.1.1 Strings
 
 As is customary with every new language one learns, let's learn how to print **"Hello world!"**:
 ```{r}
 "Hello world!"
 ```
 
-#### Arithmetic
+#### 1.1.2 Arithmetic
 
 In its most basic form, R can be used as a simple calculator. Consider the following arithmetic operators:
 - Addition: +
@@ -64,7 +66,7 @@ Another interesting thing to point out is that it inherently follows BODMAS:
 6 - 7 * 2 / 1 + 3
 ```
 
-#### Logical Values
+#### 1.1.3 Logical Values
 
 Most programming languages refer to logical values as **boolean values**. Some expressions can return `True` or `False` values:
 ```{r}
@@ -82,7 +84,7 @@ Shorthand for `TRUE` and `FALSE` is given as `T` and `F` respectively:
 T == TRUE
 ```
 
-#### Variables
+## 1.2 Variables
 
 As in other programming languages, you can store values into a variable to access it later:
 ```{r}
@@ -128,59 +130,63 @@ apples + tomatoes
 ```
 **This doesn't work as expected because the two variables(`apples` and `tomatoes`) are of different datatypes(`integer` and `character`).**
 
-### Introduction to Functions and Helpers
+## 1.3 Introduction to Functions and Helpers
 
-Functions exist to perform repeated tasks. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let's see an example of the `sum` function:
+Functions exist to perform repeated tasks. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let's see an example of the `sum(...)` function:
 ```{r}
 # Sum of 1, 3, 5
 sum(1,3,5)
 ```
+Another example:
 ```{r}
 # Sum of apples and oranges
 sum(apples, oranges)
 ```
 
-Some arguments have names. For example, to repeat a value 3 times, you would call the `rep` function and provide its `times` argument:
+Some arguments have names. For example, to repeat a value 3 times, you would call the `rep(...)` function and provide its `times` argument:
 ```{r}
 # Repeats "FIRE" 3 times
 rep("FIRE", times = 3)
 ```
 
-Most mathematical functions, like `sqrt`, have well defined functions:
+Most mathematical functions, like `sqrt(...)`, have well defined functions:
 ```{r}
 # Square root of 16
 sqrt(16)
 ```
 
-#### Helpers
+#### 1.3.1 Helpers
 
-`help(functionname)` brings up help for the given function. Try displaying help for the sum function:
+`help(...)` brings up help for the given function. Try displaying help for the sum function:
 ```{r}
 help(sum)
 # We can also bring up the help file in this way
 ?sum
 ```
 
-`example(functionname)` brings up examples of usage for the given function. Try displaying examples for the min function:
+`example(...)` brings up examples of usage for the given function. Try displaying examples for the min function:
 ```{r}
 example(sum)
 ```
 
-Of the most important helper functions used is `class`. It helps us to determine the datatype of the variable:
+Of the most important helper functions used is `class(...)`. It helps us to determine the datatype of the variable:
 ```{r}
 class(apples)
 ```
-```{r}
-class(tomatoes)
-```
-```{r}
-class(FALSE)
-```
 
-### MISC
+## 1.4 Miscellaneous
 
-Commands are separated either by a semi-colon (`;`), or by a newline. Elementary commands can be grouped together into one compound expression by braces (`{` and `}`). Comments can be put almost anywhere, starting with a hashmark (`#`), everything to the end of the line is a comment.
+The (logical) comparison operators known to R are:
+
+- `<` for less than
+- `>` for greater than
+- `<=` for less than or equal to
+- `>=` for greater than or equal to
+- `==` for equal to each other
+- `!=` not equal to each other
+
+Commands are separated either by a semi-colon (`;`), or by a newline. Elementary commands can be grouped together into one compound expression by braces (`{` and `}`). Comments can be put almost anywhere, starting with a hashmark (`#`), everything to the end of the line is a comment. Finally, `print(...)` prints a message.
 ```{r}
 # Commands seperated by ;
-x <- 1; y <- 2; x + y
+x <- 1; y <- 2; print(x + y)
 ```
