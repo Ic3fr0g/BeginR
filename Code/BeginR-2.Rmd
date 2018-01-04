@@ -1,16 +1,324 @@
 ---
-title: "Vectors, Matrices and Dataframes"
-output: html_notebook
+title: "2. Vectors, Matrices and Dataframes"
+author: "Ic3fr0g"
+output:
+  html_document: default
+  html_notebook: default
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+We discussed Scalars, Variable assignments and Helper functions in brief. We will now start exploring the building blocks of R. Vectors, Matrics, Dataframes - Basic Blocks, and Lists and Structures - slightly more complex, form the core of most data structures in R.
+Before we start, let's do a quick recap - 
 
 ```{r}
-plot(cars)
+# Assigning a variable "x" the value 3
+x <- 3
+
+# Assigning a variable "sword" the value katana
+sword <- "katana"
+
+# Displays the vignette for the function
+help(sum)
+
+# Displays the datatype of the variable
+class(sword)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+## 2.1 Vectors
+Vectors are one-dimension arrays that can hold numeric data, character data, or logical data. In other words, a vector is a simple tool to store data. 
+In R, you create a vector with the combine function `c(...)`. You place the vector elements separated by a comma between the parentheses. For example:
+```{r}
+# "x" is a numerical vector of the first five odd numbers
+x <- c(1,3,5,7,9)
+# Show x
+x
+```
+Here's an example of a character vector:
+```{r}
+# "sword" is a character vector of swords
+sword <- c("katana", "brisingr", "broadsword", "zar'roc")
+# Print sword
+sword
+```
+**Vectors cannot hold values with different modes (types).** Try mixing modes and see what happens:
+```{r}
+# What happens to the vector in this particular case ?
+c(1.57,TRUE,"three")
+```
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
+#### 2.1.1 Sequence Vectors
+It'll be tedious to type out all numbers - 1,2,3,4,5,...,100 if you were to create a vector of length 100. Luckily, there are generators for this sort of thing. The colon operator(`:`) is one example:
+```{r}
+# ":" operator
+1:10
+```
+Another versatile way is to use the function `seq(...)` :
+```{r}
+seq(1,10)
+```
+Generally, every function takes in arguments and performs some operations using those arguments. The `seq(...)` function for example, takes three arguements:
+```{r}
+# seq(from = ,to = , by = )
+# from, to - the starting and (maximal) end values of the sequence.
+# by - number: increment of the sequence.
+
+seq(from = 3, to = -3, by = -0.5)
+```
+
+#### 2.1.2 Vector Access
+Vector elements can be accessed by using a numerical index within square brakcets:
+```{r}
+# Initialise a sentence
+sentence <- c("the","black","dog")
+# Obtain the 3rd element of the vector
+sentence[3]
+```
+**Indices in R start from 1:**
+```{r}
+# First element in vector, index starts with 1
+sentence[1]
+```
+Replacing can be done very easily:
+```{r}
+# Replacing "black" with "brown"
+sentence[2] <- "brown"
+# Display sentence
+sentence
+```
+Adding values to a vector:
+```{r}
+# Adding "barks" to the vector
+sentence[4] <- "barks"
+# Display sentence
+sentence
+```
+Using a vector within the square brackets enables you to access multiple elements:
+```{r}
+# Fetches the 1st and 3rd elements
+sentence[c(1,3)]
+```
+Adding and Replacing multiple elements in a vector can be done as shown below:
+```{r}
+# Adds c("at","the","man") at the 5th,6th and 7th positions
+sentence[5:7] <- c("at","the","man")
+# Display sentence
+sentence
+```
+
+#### 2.1.3 Vector Names
+In some cases, it makes sense to give each element in a vector a name. If you're familiar with Excel, you would know that each table would have named columns. In the scenario of dealing with tables, it helps to visualise a vector as a single row of the table. And vector names as the resulting column names.
+```{r}
+# Initialise a vector
+ranks <- 1:3
+# Names of the elements of the vector
+names(ranks) <- c("first","runner-up","second runner-up")
+# Display ranks
+ranks
+```
+It becomes easier to access named elements as you do not have to remember the indicies of said elements:
+```{r}
+ranks['runner-up']
+```
+
+#### 2.1.4 Vector Math
+Most arithematic operations applies to every element in the vector:
+```{r}
+# Initialise x
+x <- c(1,3,5,7,9)
+# Subtract 1 from x
+x - 1
+```
+Multiplying by 4 gives us:
+```{r}
+x * 4
+```
+Adding two vectors:
+```{r}
+# Two vectors
+a <- 1:3
+b <- c(10,100,1000)
+# Adding them
+a + b
+```
+**In the case of vector arithematic, it is imperative that the length of two vectors you are trying to (+-\*/) are the same because, every element in `a` is (+-\*/) to every element in `b`**.
+To check the length of a vector, we use the function `length(...)`:
+```{r}
+# Number of elements in "a"
+length(a)
+```
+Vectors can be **compared** to a scalar:
+```{r}
+# Initialise "a"
+a <- c(12,24,36,48)
+# Check if "a" less than 30
+a < 30
+```
+Vectors can be **compared** to other vectors:
+```{r}
+# Are these vectors similar ?
+a == c(12,18,30,48)
+```
+Vectors can also be passed to various functions:
+```{r}
+# What is sine of "a" ?
+sqrt(a)
+```
+
+#### 2.1.5 Plotting Vectors
+There are two sorts of plots that are commonplace. The first kind is a **scatterplot**:
+```{r}
+# Let's first initialise the points for the equation y = sin(x)
+x <- seq(1,20,0.1)
+y <- sin(x)
+```
+The `plot(...)` function takes in two arguments - the `x` and `y` coordinates:
+```{r}
+# Let's plot x and y
+plot(x,y)
+```
+The next kind is a `boxplot`:
+```{r}
+swords <- c(14,1,5,2)
+names(swords) <- c("katana", "brisingr", "broadsword", "zar'roc")
+barplot(swords)
+```
+We shall cover data visulisation in detail further.
+
+#### 2.1.6 Missing Values
+I'm assuming that we have all encountered missing and sparse data from time to time. R has a value that explicitly indicates a sample was not available, `NA`. Many functions that work with vectors treat this value specially.
+```{r}
+# Vector with missing value
+a <- c(1,2,3,NA,5)
+# Let's find the sum of "a"
+sum(a)
+```
+Well, remember when I said earlier that some functions can handle missing values. The `sum(...)` function is one of them:
+```{r}
+# "na.rm" is an argument that removes missing values, default is False
+sum(a, na.rm =  TRUE)
+```
+One important function to identify whether there are missing values in a vector is `is.na(...)`
+```{r}
+# Gives us a logical vector that shows the position of the NA
+is.na(a)
+```
+
+
+## 2.2 Matrices
+A matrix is nothing more than a two-dimensional array. In R, a matrix is a collection of elements of the same data type (numeric, character, or logical) arranged into a fixed number of rows and columns.
+There are multiple ways of creating matrices. The first and least common way is to create an vector and then change it's dimensions to create an array:
+```{r}
+vec <- 1:8
+# Change dimension of vec to (2,4)
+dim(vec) <- c(2,4)
+# Changes to an array representation
+vec
+```
+The most common method is to call the `matrix(...)` function:
+```{r}
+# Bring up help(matrix) to understand the arguements
+matrix(1:8, nrow = 2, ncol = 4)
+```
+
+#### 2.2.1 Matrix access
+To access elements within data structures in R, it is essential to place the indices within square brackets. If I wanted to access the element in the 1st row and 3rd column in the matrix `vec`, I'd do:
+```{r}
+# x[i, j] - i denotes the row and j denotes the column
+vec[1, 3]
+```
+To select the entire 2nd row:
+```{r}
+vec[2, ]
+```
+To select the entire 3rd column:
+```{r}
+vec[, 3]
+```
+A vector passed in the row or column place in the square brackets provides a slice of the matrix:
+```{r}
+vec[, 1:3]
+```
+Reassigning elements from the 4th column are exactly how we did with vectors:
+```{r}
+vec[, 4] <- 0
+vec
+```
+
+#### 2.2.2 Matrix Names
+Let's use the the US and Non-US sales of the box office tickets for the movie Star Wars to play around with matrices further.
+Let's first define the Box Office Sales for each movie in the prequels:
+```{r}
+# Box office Star Wars (in millions!)
+new_hope <- c(460.998, 314.4)
+empire_strikes <- c(290.475, 247.900)
+return_jedi <- c(309.306, 165.8)
+```
+Now, we construct a matrix:
+```{r}
+# Construct the matrix
+star_wars_matrix <- matrix(c(new_hope, empire_strikes, return_jedi), nrow = 3, byrow = TRUE)
+star_wars_matrix
+```
+Hmm, this just looks like abunch of numbers. Well, to identify what the matrix is about it is important to add row names and column names:
+```{r}
+# Vectors region and titles, used for naming
+region <- c("US", "non-US")
+titles <- c("A New Hope", "The Empire Strikes Back", "Return of the Jedi")
+
+# Name the columns with region
+colnames(star_wars_matrix) <- region
+# Name the rows with titles
+rownames(star_wars_matrix) <- titles
+
+# Print out star_wars_matrix
+star_wars_matrix
+```
+Adding names to the matrix helps the indexing to a greater deal by making it more readable:
+```{r}
+# This example illustrates why it's important to name matrices
+star_wars_matrix['A New Hope', 'US'] == star_wars_matrix[1, 1]
+```
+There exists a more concise way to name matrices, by passing the argument of `list(row_names, col_names)` to the matrix function. These are the names of the dimensions:
+```{r}
+sales_new_movies <- c(474.5, 552.5, 310.7, 338.7, 380.3, 468.5)
+new_titles <- c("The Phantom Menace", "Attack of the Clones", "Revenge of the Sith")
+# Construct matrix2
+star_wars_matrix2 <- matrix(sales_new_movies, nrow = 3, byrow = TRUE, dimnames = list(new_titles, region))
+# Display star_wars_matrix2
+star_wars_matrix2
+```
+
+#### 2.2.3 Adding Rows and Columns
+Let's try to combine the two matrices we just made by appending the rows together. This can be done using the `rbind(...)` function:
+```{r}
+# Combining the matrices
+star_wars <- rbind(star_wars_matrix,star_wars_matrix2)
+star_wars
+```
+About time to introduce another function here. Let's try to find the total sales for every movie and add that as a column to the complete table. The function to calculate the sum of rows is, well, `rowSums(...)`
+```{r}
+# Total Sales for every movie
+total_sales <- rowSums(star_wars)
+total_sales
+```
+Now that we have the `total_sales` vector, let's add it to the star_wars table as a column using the `cbind(...)` function:
+```{r}
+cbind(star_wars, total_sales)
+```
+
+#### 2.2.4 Plotting for matrices
+R includes powerful visualizations for matrix data. The following visualisations are used very often in EDA. For this example, we shall be using the built-in dataset `volcano`. The first plot we see is a `contour` map of the matrix.
+```{r}
+# Contour Map
+contour(volcano)
+```
+Here's a perspective plot:
+```{r}
+# Perspective plot with z axis restricted to 0.3
+# Highest value goes to z-max(0.3) and lowest to z-min(0)
+persp(volcano, expand = 0.3)
+```
+Finally, here's a heat map:
+```{r}
+image(volcano)
+```
+
