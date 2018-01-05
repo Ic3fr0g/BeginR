@@ -2,16 +2,22 @@
 title: "1. Introduction"
 author: "Ic3fr0g"
 output:
-  html_notebook: default
   html_document: default
+  html_notebook: default
 ---
-### Install R and RStudio
 
+## What is R ?
+R is a free programming language and software environment for statistical computing and graphics. The R language is widely used among statisticians and data miners for developing statistical software and data analysis.
+
+R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others. R is easily extensible through functions and extensions, and the R community is noted for its active contributions in terms of packages.
+
+R isn't used as general programming language. It sees more usage in Data Analysis and Data Visualisation primarily because of the powerful libraries behind it.
+
+## Install R and RStudio
 - [Download and install R](https://ftp.iitm.ac.in/cran/)
 - [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/)
 
-### Install Packages
-
+## Install Packages
 Open RStudio and type `install.packages(c("ggplot2","data.table","dplyr"))` in the console. The output should look like this:
 ```{r}
 # trying URL 'https://cran.rstudio.com/bin/macosx/el-capitan/contrib/3.4/ggplot2_2.2.1.tgz'
@@ -31,7 +37,6 @@ Open RStudio and type `install.packages(c("ggplot2","data.table","dplyr"))` in t
 ```
 
 ## 1.1 Scalars
-
 R works with numerous data types. Some of the most basic types to get started are:
 
 - Text (or string) values are called **characters**.
@@ -40,14 +45,12 @@ R works with numerous data types. Some of the most basic types to get started ar
 - Boolean values (`TRUE` or `FALSE`) are called **logical**.
 
 #### 1.1.1 Strings
-
 As is customary with every new language one learns, let's learn how to print **"Hello world!"**:
 ```{r}
 "Hello world!"
 ```
 
 #### 1.1.2 Arithmetic
-
 In its most basic form, R can be used as a simple calculator. Consider the following arithmetic operators:
 - Addition: +
 - Subtraction: -
@@ -68,7 +71,6 @@ Another interesting thing to point out is that it inherently follows BODMAS:
 ```
 
 #### 1.1.3 Logical Values
-
 Most programming languages refer to logical values as **boolean values**. Some expressions can return `True` or `False` values:
 ```{r}
 3 < 4
@@ -86,7 +88,6 @@ T == TRUE
 ```
 
 ## 1.2 Variables
-
 As in other programming languages, you can store values into a variable to access it later:
 ```{r}
 # Assign the value 42 to x
@@ -132,7 +133,6 @@ apples + tomatoes
 **This doesn't work as expected because the two variables(`apples` and `tomatoes`) are of different datatypes(`integer` and `character`).**
 
 ## 1.3 Introduction to Functions and Helpers
-
 Functions exist to perform repeated tasks. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let's see an example of the `sum(...)` function:
 ```{r}
 # Sum of 1, 3, 5
@@ -157,7 +157,6 @@ sqrt(16)
 ```
 
 #### 1.3.1 Helpers
-
 `help(...)` brings up help for the given function. Try displaying help for the sum function:
 ```{r}
 help(sum)
@@ -176,7 +175,6 @@ class(apples)
 ```
 
 ## 1.4 Miscellaneous
-
 The (logical) comparison operators known to R are:
 
 - `<` for less than
