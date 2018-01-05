@@ -2,8 +2,8 @@
 title: "1. Introduction"
 author: "Ic3fr0g"
 output:
-  html_document: default
   html_notebook: default
+  html_document: default
 ---
 ### Install R and RStudio
 
@@ -33,6 +33,7 @@ Open RStudio and type `install.packages(c("ggplot2","data.table","dplyr"))` in t
 ## 1.1 Scalars
 
 R works with numerous data types. Some of the most basic types to get started are:
+
 - Text (or string) values are called **characters**.
 - Decimals values like `4.5` are called **numerics**.
 - Natural numbers like `4` are called **integers**. Integers are also numerics.
@@ -190,3 +191,4 @@ Commands are separated either by a semi-colon (`;`), or by a newline. Elementary
 # Commands seperated by ;
 x <- 1; y <- 2; print(x + y)
 ```
+
