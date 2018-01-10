@@ -3,7 +3,7 @@ title: "Vectors and Matrices"
 author: "Ic3fr0g"
 date: '`r Sys.Date()`'
 output:
-  html_document:
+  html_notebook:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -12,7 +12,7 @@ output:
     number_sections: yes
     theme: cosmo
     toc: yes
-  html_notebook:
+  html_document:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -126,6 +126,12 @@ sentence[5:7] <- c("at","the","man")
 # Display sentence
 sentence
 ```
+Selecting everything but a particular index can be done so:
+```{r}
+# Select everything but the first element
+sentence[-1]
+```
+
 
 ## Vector Names
 In some cases, it makes sense to give each element in a vector a name. If you're familiar with Excel, you would know that each table would have named columns. In the scenario of dealing with tables, it helps to visualise a vector as a single row of the table. And vector names as the resulting column names.
