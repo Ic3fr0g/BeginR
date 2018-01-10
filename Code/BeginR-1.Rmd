@@ -99,6 +99,7 @@ x <- 42
 # Print out the value of the variable x
 x
 ```
+
 ## Arithematic
 Variable arithmetic also works but notice that it doesn't change the original value of `x`:
 ```{r}
@@ -184,6 +185,8 @@ The (logical) comparison operators known to R are:
 - `>=` for greater than or equal to
 - `==` for equal to each other
 - `!=` not equal to each other
+
+A **syntactically valid variable name** consists of letters, numbers and the dot or underline characters and starts with a letter or the dot not followed by a number. Names such as ".2way" are not valid, and neither are the reserved words. See `?make.names`.
 
 Commands are separated either by a semi-colon (`;`), or by a newline. Elementary commands can be grouped together into one compound expression by braces (`{` and `}`). Comments can be put almost anywhere, starting with a hashmark (`#`), everything to the end of the line is a comment. Finally, `print(...)` prints a message.
 ```{r}
