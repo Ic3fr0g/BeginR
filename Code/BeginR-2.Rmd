@@ -1,10 +1,30 @@
 ---
-title: "2. Vectors, Matrices and Dataframes"
+title: "Vectors and Matrices"
 author: "Ic3fr0g"
+date: '`r Sys.Date()`'
 output:
-  html_document: default
-  html_notebook: default
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+  html_notebook:
+    code_folding: show
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: cosmo
+    toc: yes
 ---
+
+
+# Recap {.tabset .tabset-fade .tabset-pills}
 
 We discussed Scalars, Variable assignments and Helper functions in brief. We will now start exploring the building blocks of R. Vectors, Matrics, Dataframes - Basic Blocks, and Lists and Structures - slightly more complex, form the core of most data structures in R.
 Before we start, let's do a quick recap - 
@@ -23,7 +43,10 @@ help(sum)
 class(sword)
 ```
 
-## 2.1 Vectors
+
+# Vectors {.tabset .tabset-fade .tabset-pills}
+
+## Introduction to Vectors
 Vectors are one-dimension arrays that can hold numeric data, character data, or logical data. In other words, a vector is a simple tool to store data. 
 In R, you create a vector with the combine function `c(...)`. You place the vector elements separated by a comma between the parentheses. For example:
 ```{r}
@@ -45,7 +68,7 @@ sword
 c(1.57,TRUE,"three")
 ```
 
-#### 2.1.1 Sequence Vectors
+## Sequence Vectors
 It'll be tedious to type out all numbers - 1,2,3,4,5,...,100 if you were to create a vector of length 100. Luckily, there are generators for this sort of thing. The colon operator(`:`) is one example:
 ```{r}
 # ":" operator
@@ -64,7 +87,7 @@ Generally, every function takes in arguments and performs some operations using 
 seq(from = 3, to = -3, by = -0.5)
 ```
 
-#### 2.1.2 Vector Access
+## Vector Access
 Vector elements can be accessed by using a numerical index within square brakcets:
 ```{r}
 # Initialise a sentence
@@ -104,7 +127,7 @@ sentence[5:7] <- c("at","the","man")
 sentence
 ```
 
-#### 2.1.3 Vector Names
+## Vector Names
 In some cases, it makes sense to give each element in a vector a name. If you're familiar with Excel, you would know that each table would have named columns. In the scenario of dealing with tables, it helps to visualise a vector as a single row of the table. And vector names as the resulting column names.
 ```{r}
 # Initialise a vector
@@ -119,7 +142,7 @@ It becomes easier to access named elements as you do not have to remember the in
 ranks['runner-up']
 ```
 
-#### 2.1.4 Vector Math
+## Vector Math
 Most arithematic operations applies to every element in the vector:
 ```{r}
 # Initialise x
@@ -163,7 +186,7 @@ Vectors can also be passed to various functions:
 sqrt(a)
 ```
 
-#### 2.1.5 Plotting Vectors
+## Plotting Vectors
 There are two sorts of plots that are commonplace. The first kind is a **scatterplot**:
 ```{r}
 # Let's first initialise the points for the equation y = sin(x)
@@ -183,7 +206,7 @@ barplot(swords)
 ```
 We shall cover data visulisation in detail further.
 
-#### 2.1.6 Missing Values
+## Missing Values
 I'm assuming that we have all encountered missing and sparse data from time to time. R has a value that explicitly indicates a sample was not available, `NA`. Many functions that work with vectors treat this value specially.
 ```{r}
 # Vector with missing value
@@ -203,7 +226,9 @@ is.na(a)
 ```
 
 
-## 2.2 Matrices
+# Matrices {.tabset .tabset-fade .tabset-pills}
+
+## Introduction to Matrices
 A matrix is nothing more than a two-dimensional array. In R, a matrix is a collection of elements of the same data type (numeric, character, or logical) arranged into a fixed number of rows and columns.
 There are multiple ways of creating matrices. The first and least common way is to create an vector and then change it's dimensions to create an array:
 ```{r}
@@ -219,7 +244,7 @@ The most common method is to call the `matrix(...)` function:
 matrix(1:8, nrow = 2, ncol = 4)
 ```
 
-#### 2.2.1 Matrix access
+## Matrix access
 To access elements within data structures in R, it is essential to place the indices within square brackets. If I wanted to access the element in the 1st row and 3rd column in the matrix `vec`, I'd do:
 ```{r}
 # x[i, j] - i denotes the row and j denotes the column
@@ -243,7 +268,7 @@ vec[, 4] <- 0
 vec
 ```
 
-#### 2.2.2 Matrix Names
+## Matrix Names
 Let's use the the US and Non-US sales of the box office tickets for the movie Star Wars to play around with matrices further.
 Let's first define the Box Office Sales for each movie in the prequels:
 ```{r}
@@ -287,7 +312,7 @@ star_wars_matrix2 <- matrix(sales_new_movies, nrow = 3, byrow = TRUE, dimnames =
 star_wars_matrix2
 ```
 
-#### 2.2.3 Adding Rows and Columns
+## Adding Rows and Columns
 Let's try to combine the two matrices we just made by appending the rows together. This can be done using the `rbind(...)` function:
 ```{r}
 # Combining the matrices
@@ -305,7 +330,7 @@ Now that we have the `total_sales` vector, let's add it to the star_wars table a
 cbind(star_wars, total_sales)
 ```
 
-#### 2.2.4 Plotting for matrices
+## Plotting for matrices
 R includes powerful visualizations for matrix data. The following visualisations are used very often in EDA. For this example, we shall be using the built-in dataset `volcano`. The first plot we see is a `contour` map of the matrix.
 ```{r}
 # Contour Map
