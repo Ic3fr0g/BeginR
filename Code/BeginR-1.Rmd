@@ -3,7 +3,7 @@ title: "Introduction to R"
 author: "Ic3fr0g"
 date: '`r Sys.Date()`'
 output:
-  html_notebook:
+  html_document:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -12,7 +12,7 @@ output:
     number_sections: yes
     theme: cosmo
     toc: yes
-  html_document:
+  html_notebook:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -99,6 +99,14 @@ x <- 42
 # Print out the value of the variable x
 x
 ```
+Another way to assign a variable is by calling the `assign(...)` function:
+```{r}
+# Call the assign function
+assign('this_var_x',43210)
+# Display 'this_var_x'
+this_var_x
+```
+
 
 ## Arithematic
 Variable arithmetic also works but notice that it doesn't change the original value of `x`:
@@ -169,9 +177,17 @@ help(sum)
 ```{r}
 example(sum)
 ```
-Of the most important helper functions used is `class(...)`. It helps us to determine the datatype of the variable:
+
+## Tests
+One of the most important helper functions used is `class(...)`. It helps us to determine the datatype of the variable:
 ```{r}
+# Returns the class of the object
 class(apples)
+```
+Another way to determine the class of an object follows:
+```{r}
+# Returns a boolean value
+is.numeric(tomatoes)
 ```
 
 
