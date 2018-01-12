@@ -1,0 +1,342 @@
+---
+title: "Dataframes, Lists and Summary Statistics"
+author: "Ic3fr0g"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+  html_notebook:
+    code_folding: show
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+---
+
+
+# Recap {.tabset .tabset-fade .tabset-pills}
+
+## Vectors
+Vectors are a series of numbers, characters or boolean values.
+```{r}
+# Assignment
+numeric_vector <- 1:10    # OR assign('numeric_vector', 1:10)
+# Squared numbers
+squared_numbers <- numeric_vector^2
+# All squared numbers but the last 3
+squared_numbers[-(8:10)]
+```
+The length of a vector can be determined like so:
+```{r}
+length(squared_numbers)
+```
+
+## Matrices
+Matrices are two dimensional arrays containing elements of the same data-type:
+```{r}
+# List of albums
+albums <- c('Infinite', 'The Slim Shady LP', 'The Marshall Mathers LP', 
+            'The Eminem Show', 'Encore', 'Relapse', 'Recovery', 
+            'The Marshall Mathers LP 2', 'Revival')
+# Year of Release
+years <- c(1996, 1999, 2000, 2002, 2004, 2009, 2010, 2013, 2017)
+# Eminem Matrix album
+eminem_album_releases <- matrix(c(albums,years), nrow = 9, ncol = 2)
+# Colnames of the matrix
+colnames(eminem_album_releases) <- c("Albums","Release Year")
+# Display
+eminem_album_releases
+```
+Let's get the second album of Eminem:
+```{r}
+# Will the Real Slim Shady please stand up ?
+eminem_album_releases[2, 'Albums']
+```
+
+# Summary Statistics {.tabset .tabest-fade .tabest-pills}
+
+## Normal Distribution
+In R, you can generate a sequence of random numbers that are normally distributed with a mean of 0 and standard deviation of 1 by default:
+```{r}
+# Generate 20 random numbers
+x.norm <- rnorm(n = 20)
+# Display 'x.norm'
+x.norm
+```
+Let's sort this data, using `sort(...)`:
+```{r}
+# Sorting
+x.norm <- sort(x.norm)
+# Display
+x.norm
+```
+
+## Mean, Median and Standard Deviation
+The mean or the average value of `x.norm` can be calculated by:
+```{r}
+# Average
+mean(x.norm)
+```
+The median refers to the middle of the all observations:
+```{r}
+# Median
+median(x.norm)
+```
+The standard deviation, which calculates how far the observations stray from the mean,can also be calculated using the formula: 
+$$\sqrt{\frac{\sum_{i=1}^N (x_i - \bar{x})^2}{N-1}}$$
+The same can be done in R like so:
+```{r}
+# Standard deviation formula in R
+sqrt(sum((x.norm - mean(x.norm))^2)/(length(x.norm) - 1))
+```
+*Mom's spaghetti!!!* There's always a better way to do things, we can use the `sd(...)` function:
+```{r}
+# SD from the function
+sd(x.norm)
+```
+
+## Minimum, Maximum, Quantiles and Summary
+Let's see the functions `min(...)` and `max(...)` in action:
+```{r}
+# Returns the smallest and biggest element
+print(c(min(x.norm), max(x.norm)))
+```
+Quantiles are cutpoints between the observations that splits the data into equal parts. There are several quantile systems, but we generally refer to the 4-quantile system:
+```{r}
+# Find the quantiles
+q <- quantile(x.norm)
+# Display
+q
+```
+Using what we learnt from vector logic, let's see how the quantiles splits `x.norm`:
+```{r}
+# First quantile
+x.norm[x.norm < q[2]]
+```
+```{r}
+# Second quantile
+x.norm[x.norm > q[2] & x.norm < q[3]]
+```
+Well, in this case as well there seems to better things to calculate the basic statistics using `summary(...)`:
+```{r}
+# Generic function to describe an object
+summary(x.norm)
+```
+
+## Plotting Statistics
+Let's plot 20 random points to understand the normal distribution:
+```{r}
+plot(rnorm(20))
+```
+
+Hmm, I think it will easier to appreciate the properties of the normal distribution *(0 mean and 1 standard deviation)* with more points:
+```{r}
+plot(rnorm(1000))
+```
+
+For people interested in seeing the density function for these points:
+```{r}
+w <- rnorm(1000) 
+hist(w, col = "red", freq = F, xlim = c(-5,5))
+curve(dnorm, -5, 5, add = T, col = "blue")
+```
+
+Let's introduce a function `abline(...)` which enables us to add horizontal and vertical lines to an existing plot: 
+```{r}
+plot(x.norm)
+# 'h' means horizontal line
+# 'col' means color
+abline(h = mean(x.norm), col = 'red')
+abline(h = median(x.norm), col = 'blue')
+abline(h = mean(x.norm) + sd(x.norm), col = 'green')
+abline(h = mean(x.norm) - sd(x.norm), col = 'green')
+```
+
+Let's try to plot the quantiles from before:
+```{r}
+plot(x.norm)
+abline(h = median(x.norm), col = 'blue')
+abline(h = summary(x.norm)[2], col = 'red')
+abline(h = summary(x.norm)[5], col = 'red')
+```
+
+
+# Factors {.tabset .tabest-fade .tabest-pills}
+
+## Categorical Variables
+The term factor refers to a statistical data type used to store categorical variables. The difference between a categorical variable and a continuous variable is that a categorical variable can belong to a limited number of categories. A continuous variable, on the other hand, can correspond to an infinite number of values. Let's invoke the `factor(...)` function:
+```{r}
+# Language Codes
+lang <- c("en","fr","hi","hi","ru","ru","ru","ru","fr","hi","en","cn")
+# Factor of Language codes
+langf <- factor(lang)
+langf
+```
+There are two types of categorical variables: a **nominal** categorical variable and an **ordinal** categorical variable. A nominal variable is a categorical variable without an implied order. This means that it is impossible to say that 'one is worth more than the other'. While, the ordinal variable will have some inherent ordering. We've just seen an example of a nominal variable, let's see an example of the ordinal variable:
+```{r}
+# Speed traps measuring car speeds
+speed <- c("high","med","high","med","low")
+# The ordering is given by specifying the levels
+speedf <- factor(speed, ordered = TRUE, levels = c("low","med","high"))
+speedf
+```
+
+## Levels
+Notice also that there are no quotes around the values. That's because they're not strings; they're actually integer references to one of the factor's levels. But what is a *level*? It is simply the unique values in the vector:
+```{r}
+levels(speedf)
+```
+Let's try comparing ordered factors. In our previous example, we want to test whether the second car is going slower than the third car:
+```{r}
+# Ordered factors can compare strings
+speedf[2] < speedf[3]
+```
+
+## Frequency tables
+Try calling `summary(...)` on every object from now on:
+```{r}
+# Returns frequencies
+summary(langf)
+```
+
+## Tests for Factors
+At this point, there are built-in functions that are similar for nearly every data structure, so don't be surprised with a `is.factor(...)`:
+```{r}
+# Performs a check for factor
+is.factor(langf)
+```
+Or, something like this:
+```{r}
+# Returns a vector
+as.vector(langf)
+```
+Or, this:
+```{r}
+# Returns a column
+as.matrix(langf)
+```
+
+
+# Dataframes {.tabset .tabest-fade .tabest-pills}
+
+## Explore a Dataset
+There are several built-in datasets within R. Arguably, the 'Hello World' example of these datasets is `mtcars`:
+```{r}
+# Motor Trend Car Road Tests
+mtcars
+```
+Let's have a look at the top rows from this dataset using `head(...)`:
+```{r}
+# Top rows
+head(mtcars)
+```
+Let's have a look at the bottom rows from this dataset using `tail(...)`:
+```{r}
+# Bottom rows
+tail(mtcars)
+```
+Invoking `class(mtcars)` will tell us it's an object of type `data.frame`. But let's go a step further and explore the structure of the data frame using `str(...)`:
+```{r}
+# Returns the structure
+str(mtcars)
+```
+
+## Creating Dataframes
+Calling the `data.frame(...)` function enables us to create a dataframe. Notice the vector names become the column names automatically. Each data argument to the `data.frame(...)` function takes the form of either *value* or *tag = value*:
+```{r}
+# Definition of vectors
+name <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
+type <- c("Terrestrial planet", "Terrestrial planet", "Terrestrial planet", 
+          "Terrestrial planet", "Gas giant", "Gas giant", "Gas giant", "Gas giant")
+diameter <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)
+rotation <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)
+rings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)
+
+# Create a data frame from the vectors
+planets_df <- data.frame(name, type, diameter, rotation, rings)
+planets_df
+```
+Let's explore the structure once again:
+```{r}
+# Returns the structure of the planets
+str(planets_df)
+```
+
+## Dataframe Access
+Dataframes share a lot in common with matrices. Think of dataframes as extended matrices, without the necessity to contain elements of the same data type. However, there are a few quirks. Let's try accessing some columns:
+```{r}
+# First column by index
+planets_df[[1]]
+```
+```{r}
+# First column by name
+planets_df[['type']]
+```
+```{r}
+# By using the '$' atomic vector
+planets_df$diameter
+```
+
+## Tests for Dataframes
+TLDR, `is.data.frame(...)`:
+```{r}
+# Checks if 'planets_df' is a dataframe
+is.data.frame(planets_df)
+```
+You can also coerce other objects into dataframes:
+```{r}
+# Coerces matrix to dataframe
+as.data.frame(matrix(1:10, nrow = 5, ncol = 2, dimnames = list(NULL, c("X","Y"))))
+```
+
+
+# Practice! Practice! Practice! {.tabset .tabset-fade .tabset-pills}
+
+## Access by Indices
+What's the diameter of Mercury?
+```{r}
+# Print out diameter of Mercury (row 1, column 3)
+planets_df[1,3]
+```
+Show me all the data for Mars!
+```{r}
+# Print out data for Mars (entire fourth row)
+planets_df[4, ]
+```
+
+## Access by names
+What are the diameters of all planets?
+```{r}
+# planets_df[['diameters']] is also valid
+planets_df$diameter
+```
+What type of planets are the first 3 planets?
+```{r}
+# planets_df[1:3,"type"] is also valid
+planets_df$type[1:3]
+```
+
+## Access by logical vectors
+Which planets have positive rotation?
+```{r}
+# planets_df[,'rotation'] > 0 is also valid
+positive_rotation <- planets_df$rotation > 0
+# Plantes with positive rotation
+planets_df[positive_rotation,]
+```
+Names of the planets that have positive rotation and rings:
+```{r}
+# Give yourself a cookie if you got this right!!!
+planets_df[planets_df$rotation > 0 & planets_df$rings, 'name']
+```
+

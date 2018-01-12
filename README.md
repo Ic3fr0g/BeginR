@@ -4,8 +4,8 @@
 Learn the basics of R
 - [Session 1](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-1.html) - Introduction to R
 - [Session 2](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-2.html) - Vectors and Matrices
-- [Session 3](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-3.html)[WIP] - Summary statistics, Data Frames, Lists
-- [Session 4](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-4.html)[WIP] - EDA
+- [Session 3](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-3.html) - Summary statistics, Factors and Data Frames
+- [Session 4](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-4.html)[WIP] - Lists and EDA
 - [Session 5](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-5.html)[WIP] - Control flow, loops, functions, apply
 - [Session 6](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-6.html)[WIP] - Correlation and Regression
 
@@ -16,6 +16,6 @@ Install R and RStudio:
 
 ## References
 - [CRAN Docs](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
-- [TryR for Basics](http://tryr.codeschool.com/)
+- [CodeSchool's TryR for basics](http://tryr.codeschool.com/)
 - [DataCamp's Inro to R for cleaner definitions](https://github.com/datacamp/courses-intro-to-r)
 - [Github user Zhiming Mingskyz for examples](https://github.com/Mingskyz/learnR)
