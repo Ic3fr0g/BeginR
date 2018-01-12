@@ -3,7 +3,7 @@ title: "Vectors and Matrices"
 author: "Ic3fr0g"
 date: '`r Sys.Date()`'
 output:
-  html_notebook:
+  html_document:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -12,7 +12,7 @@ output:
     number_sections: yes
     theme: cosmo
     toc: yes
-  html_document:
+  html_notebook:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -174,6 +174,13 @@ To check the length of a vector, we use the function `length(...)`:
 # Number of elements in "a"
 length(a)
 ```
+As in the example above, vectors can also be passed to functions:
+```{r}
+# What is square root of "a" ?
+sqrt(a)
+```
+
+## Vector Logic
 Vectors can be **compared** to a scalar:
 ```{r}
 # Initialise "a"
@@ -186,10 +193,17 @@ Vectors can be **compared** to other vectors:
 # Are these vectors similar ?
 a == c(12,18,30,48)
 ```
-Vectors can also be passed to various functions:
+We have already seen how vectors can be accessed by characters and numbers as indices but there's a way for vectors to access elements from a logical vectors. The above examples return a **logical vector**. This essentially indicates the index of elements where the logical expression holds. Let's pass this logical vector to the vector itself:
 ```{r}
-# What is sine of "a" ?
-sqrt(a)
+# 'a < 30' as a logical vector, returns the elements
+a[a < 30]
+```
+Let's see another example:
+```{r}
+# 'a %% 24 == 0' checks whether the
+# remainder is 0 when 'a' divided by 24.
+# Elements of 'a' that are divisible by 24
+a[a %% 24 == 0]
 ```
 
 ## Plotting Vectors
@@ -229,6 +243,13 @@ One important function to identify whether there are missing values in a vector 
 ```{r}
 # Gives us a logical vector that shows the position of the NA
 is.na(a)
+```
+
+## Test for Vectors
+You can test for the object being a vector by using `is.vector(...)`:
+```{r}
+# Returns a boolean value
+is.vector(c(1,2,3))
 ```
 
 
@@ -272,6 +293,31 @@ Reassigning elements from the 4th column are exactly how we did with vectors:
 ```{r}
 vec[, 4] <- 0
 vec
+```
+
+## Matrix Arithematic
+The basic rules for linear algebra apply for all matrix operations. However there are some special operators we need to look at to understand matrix multiplication. Let's start with understanding the shape of the matrix `vec` using `dim(...)`:
+```{r}
+# Displays the dimensions of the matrix
+dim(vec)
+```
+Let's see what the `*` operator does when we try to multiply `vec` with itself:
+```{r}
+# Elementwise operations
+vec * vec
+```
+Clearly, this isn't quite *matrix multiplication*. Remember that in when dealing with matrices, the dimensions(the subscript of the formula) is very important:
+$$A_{m \times n} \times B_{n \times o} = C_{m \times o}$$
+So, it's important to visit what a *transpose* is, if $A$ is a matrix with dimensions ${m \times n}$
+then, the transpose $A^T$ has dimensions ${n \times m}$. In R:
+```{r}
+# Transpose of 'vec'
+t(vec)
+```
+Finally, the new operator that we shall use is `%*%` for matrix multiplication:
+```{r}
+# Multiply 'vec' with its transpose
+vec %*% t(vec)
 ```
 
 ## Matrix Names
@@ -333,7 +379,32 @@ total_sales
 ```
 Now that we have the `total_sales` vector, let's add it to the star_wars table as a column using the `cbind(...)` function:
 ```{r}
-cbind(star_wars, total_sales)
+# Adding a column
+star_wars <- cbind(star_wars, total_sales)
+# Display
+star_wars
+```
+
+## Matrix Logic
+Using the same logic as we did in vectors let's find all the star wars movies which grossed more than 350 million in the US :
+```{r}
+# Returns a logical vector where this expression holds
+star_wars[, 'US'] > 350
+```
+Aping what we did before, let's pass the logical vector to the matrix:
+```{r}
+# Values of all rows where US sales > 350mil
+star_wars[star_wars[, 'US'] > 350,]
+```
+Let's explore another example and find in which region *'A New Hope'* made more than 400 million:
+```{r}
+# Regions where 'A New Hope' made more than 400mil
+star_wars['A New Hope',] > 400
+```
+Let's get how much sales these regions ('US' and 'Worldwide') made:
+```{r}
+# Values
+star_wars['A New Hope', star_wars['A New Hope',] > 400]
 ```
 
 ## Plotting for matrices
@@ -351,5 +422,17 @@ persp(volcano, expand = 0.3)
 Finally, here's a heat map:
 ```{r}
 image(volcano)
+```
+
+## Tests for Matrices
+While we may never know whether we are living in a simulation or not, there's a simple way to determine whether an object is a matrix within R:
+```{r}
+# Returns a matrix
+is.matrix(star_wars)
+```
+There's a way to convert a matrix back to a vector using the `as.vector(...)` function:
+```{r}
+# Returns a vector
+as.vector(star_wars)
 ```
 
