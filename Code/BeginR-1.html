@@ -11,7 +11,7 @@
 
 <meta name="author" content="Ic3fr0g" />
 
-<meta name="date" content="2018-01-11" />
+<meta name="date" content="2018-01-12" />
 
 <title>Introduction to R</title>
 
@@ -167,7 +167,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Introduction to R</h1>
 <h4 class="author"><em>Ic3fr0g</em></h4>
-<h4 class="date"><em>2018-01-11</em></h4>
+<h4 class="date"><em>2018-01-12</em></h4>
 
 </div>
 
@@ -184,6 +184,7 @@ $(document).ready(function () {
 <li><a href="#variables"><span class="toc-section-number">4</span> Variables</a><ul>
 <li><a href="#assignment"><span class="toc-section-number">4.1</span> Assignment</a></li>
 <li><a href="#arithematic"><span class="toc-section-number">4.2</span> Arithematic</a></li>
+<li><a href="#logical"><span class="toc-section-number">4.3</span> Logical</a></li>
 </ul></li>
 <li><a href="#introduction-to-functions-and-helpers"><span class="toc-section-number">5</span> Introduction to Functions and Helpers</a><ul>
 <li><a href="#examples-of-functions"><span class="toc-section-number">5.1</span> Examples of functions</a></li>
@@ -246,14 +247,39 @@ $(document).ready(function () {
 </div>
 <div id="logical-values" class="section level2">
 <h2><span class="header-section-number">3.4</span> Logical Values</h2>
+<p>There are 3 logical operators:</p>
+<ul>
+<li><code>&amp;</code>, <code>&amp;&amp;</code> - and</li>
+<li><code>|</code>, <code>||</code> - or</li>
+<li><code>!</code> - not</li>
+</ul>
+<p>The (logical) comparison operators known to R are:</p>
+<ul>
+<li><code>&lt;</code> for less than</li>
+<li><code>&gt;</code> for greater than</li>
+<li><code>&lt;=</code> for less than or equal to</li>
+<li><code>&gt;=</code> for greater than or equal to</li>
+<li><code>==</code> for equal to each other</li>
+<li><code>!=</code> not equal to each other</li>
+</ul>
 <p>Most programming languages refer to logical values as <strong>boolean values</strong>. Some expressions can return <code>True</code> or <code>False</code> values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># AND</span>
+<span class="dv">1</span> &amp;<span class="st"> </span><span class="dv">0</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># OR</span>
+<span class="dv">0</span> |<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># NOT</span>
+!<span class="dv">0</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Here’s an example of the comparison logical operator:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> &lt;<span class="st"> </span><span class="dv">4</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The <code>==</code> sign checks for equivalence of an expression:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># == sign checks for equivalence</span>
 <span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span> ==<span class="st"> </span><span class="dv">5</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<p>Shorthand for <code>TRUE</code> and <code>FALSE</code> is given as <code>T</code> and <code>F</code> respectively:</p>
+<p>Shorthand for <code>TRUE</code> and <code>FALSE</code> are given as <code>T</code> and <code>F</code> respectively:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T ==<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
@@ -303,6 +329,20 @@ apples +<span class="st"> </span>oranges</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apples +<span class="st"> </span>tomatoes</code></pre></div>
 <pre><code>## Error in apples + tomatoes: non-numeric argument to binary operator</code></pre>
 <p><strong>This doesn’t work as expected because the two variables(<code>apples</code> and <code>tomatoes</code>) are of different datatypes(<code>integer</code> and <code>character</code>).</strong></p>
+</div>
+<div id="logical" class="section level2">
+<h2><span class="header-section-number">4.3</span> Logical</h2>
+<p>Variables can be compared to scalars:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Are the number of apples less than 2?</span>
+apples &lt;<span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Variables can be compared to other vectors as well:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Comparing vectors</span>
+apples ==<span class="st"> </span>oranges</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>We can introduce complex logical expressions by linking them with either of the three logical operators(<code>!</code>,<code>|</code>,<code>&amp;</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apples &gt;<span class="st"> </span><span class="dv">2</span> &amp;<span class="st"> </span>oranges &lt;<span class="st"> </span><span class="dv">7</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 <div id="introduction-to-functions-and-helpers" class="section level1 tabset tabset-fade tabset-pills">
@@ -369,15 +409,6 @@ apples +<span class="st"> </span>oranges</code></pre></div>
 </div>
 <div id="miscellaneous" class="section level1">
 <h1><span class="header-section-number">6</span> Miscellaneous</h1>
-<p>The (logical) comparison operators known to R are:</p>
-<ul>
-<li><code>&lt;</code> for less than</li>
-<li><code>&gt;</code> for greater than</li>
-<li><code>&lt;=</code> for less than or equal to</li>
-<li><code>&gt;=</code> for greater than or equal to</li>
-<li><code>==</code> for equal to each other</li>
-<li><code>!=</code> not equal to each other</li>
-</ul>
 <p>A <strong>syntactically valid variable name</strong> consists of letters, numbers and the dot or underline characters and starts with a letter or the dot not followed by a number. Names such as “.2way” are not valid, and neither are the reserved words. See <code>?make.names</code>.</p>
 <p>Commands are separated either by a semi-colon (<code>;</code>), or by a newline. Elementary commands can be grouped together into one compound expression by braces (<code>{</code> and <code>}</code>). Comments can be put almost anywhere, starting with a hashmark (<code>#</code>), everything to the end of the line is a comment. Finally, <code>print(...)</code> prints a message.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Commands seperated by ;</span>

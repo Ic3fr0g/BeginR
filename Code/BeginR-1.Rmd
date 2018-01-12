@@ -3,7 +3,7 @@ title: "Introduction to R"
 author: "Ic3fr0g"
 date: '`r Sys.Date()`'
 output:
-  html_document:
+  html_notebook:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -12,7 +12,7 @@ output:
     number_sections: yes
     theme: cosmo
     toc: yes
-  html_notebook:
+  html_document:
     code_folding: show
     fig_caption: yes
     fig_height: 4.5
@@ -54,6 +54,7 @@ As is customary with every new language one learns, let's learn how to print **"
 ```{r}
 "Hello world!"
 ```
+
 ## Arithmetic
 In its most basic form, R can be used as a simple calculator. Consider the following arithmetic operators:
 
@@ -73,8 +74,37 @@ Another interesting thing to point out is that it inherently follows BODMAS:
 # Inherently follows BODMAS
 6 - 7 * 2 / 1 + 3
 ```
+
 ## Logical Values
+There are 3 logical operators:
+
+- `&`, `&&` - and
+- `|`, `||` - or
+- `!` - not
+
+The (logical) comparison operators known to R are:
+
+- `<` for less than
+- `>` for greater than
+- `<=` for less than or equal to
+- `>=` for greater than or equal to
+- `==` for equal to each other
+- `!=` not equal to each other
+
 Most programming languages refer to logical values as **boolean values**. Some expressions can return `True` or `False` values:
+```{r}
+# AND
+1 & 0
+```
+```{r}
+# OR
+0 | 1
+```
+```{r}
+# NOT
+!0
+```
+Here's an example of the comparison logical operator:
 ```{r}
 3 < 4
 ```
@@ -83,7 +113,7 @@ The `==` sign checks for equivalence of an expression:
 # == sign checks for equivalence
 2 + 2 == 5
 ```
-Shorthand for `TRUE` and `FALSE` is given as `T` and `F` respectively:
+Shorthand for `TRUE` and `FALSE` are given as `T` and `F` respectively:
 ```{r}
 T == TRUE
 ```
@@ -106,7 +136,6 @@ assign('this_var_x',43210)
 # Display 'this_var_x'
 this_var_x
 ```
-
 
 ## Arithematic
 Variable arithmetic also works but notice that it doesn't change the original value of `x`:
@@ -140,6 +169,22 @@ What about the sum of the apples and tomatoes ?
 apples + tomatoes
 ```
 **This doesn't work as expected because the two variables(`apples` and `tomatoes`) are of different datatypes(`integer` and `character`).**
+
+## Logical
+Variables can be compared to scalars:
+```{r}
+# Are the number of apples less than 2?
+apples < 2
+```
+Variables can be compared to other vectors as well:
+```{r}
+# Comparing vectors
+apples == oranges
+```
+We can introduce complex logical expressions by linking them with either of the three logical operators(`!`,`|`,`&`):
+```{r}
+apples > 2 & oranges < 7
+```
 
 
 # Introduction to Functions and Helpers {.tabset .tabset-fade .tabset-pills}
@@ -192,15 +237,6 @@ is.numeric(tomatoes)
 
 
 # Miscellaneous
-
-The (logical) comparison operators known to R are:
-
-- `<` for less than
-- `>` for greater than
-- `<=` for less than or equal to
-- `>=` for greater than or equal to
-- `==` for equal to each other
-- `!=` not equal to each other
 
 A **syntactically valid variable name** consists of letters, numbers and the dot or underline characters and starts with a letter or the dot not followed by a number. Names such as ".2way" are not valid, and neither are the reserved words. See `?make.names`.
 
