@@ -1,5 +1,5 @@
 ---
-title: "Summary Statistics, Factors and Dataframes"
+title: "Summary Statistics, Factors, Dataframes and Lists"
 author: "Ic3fr0g"
 date: '`r Sys.Date()`'
 output:
@@ -21,6 +21,8 @@ output:
     number_sections: yes
     theme: cosmo
     toc: yes
+editor_options: 
+  chunk_output_type: inline
 ---
 
 
@@ -340,3 +342,62 @@ Names of the planets that have positive rotation and rings:
 planets_df[planets_df$rotation > 0 & planets_df$rings, 'name']
 ```
 
+
+# Lists {.tabset .tabset-fade .tabset-pills}
+
+## Creating Lists
+Lists, as opposed to vectors, can hold components of different types. These objects can be matrices, vectors, data frames, even other lists, etc. It is not even required that these objects are related to each other in any way.
+```{r}
+# Create some vectors
+heroes <- c('Ironman', 'Thor', 'Captain America', 'Wonder Woman', 'Batman')
+actors <- c('Sir Robert Downey Jr', 'Chris Hemsworth', 'Chris Evans', 'Gal Gadot', 'Christian Bale')
+level <- c(100, 1000, 10, 10000, 100000)
+# Initialise the list
+super_heroes <- list(power_level = data.frame(heroes,level),
+                     serial_no = 1:5, 
+                     actor_names = actors)
+super_heroes
+```
+
+## Access for lists
+We can access the elements in a list through indexing through double squared brackets `[[...]]`:
+```{r}
+# Displays the second element in the list
+super_heroes[[2]]
+```
+The list can be accessed through the named elements as well. Let's use `names(...)` to see the named elements of the list:
+```{r}
+# Named elements of the list
+names(super_heroes)
+```
+There are two fundamental ways to access a list through names, here we use the element name:
+```{r}
+# Access using element names
+super_heroes[["serial_no"]]
+```
+And here we invoke the atomic vector
+```{r}
+# Access with an atomic vector
+super_heroes$power_level
+```
+
+## Test for list
+The function `is.list(...)` tests for lists and returns a boolean value:
+```{r}
+# Returns a boolean value
+is.list(super_heroes)
+```
+One can also coerce an object into a list using the function `as.list(...)`:
+```{r}
+# Create a dataframe
+The_Simpsons <- data.frame(first_name = c("Bart","Lisa","Homer","Marge","Baby"), 
+                           last_name = rep("Simpson", 5))
+The_Simpsons
+# Coercing a dataframe into a list
+as.list(The_Simpsons)
+```
+But more often we will use `str(...)` to describe objects like lists:
+```{r}
+# Displays the entire structure of the list
+str(super_heroes)
+```
