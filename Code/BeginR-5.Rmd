@@ -1,0 +1,200 @@
+---
+title: "Control flow, loops, apply and functions"
+author: "Ic3fr0g"
+date: '`r Sys.Date()`'
+output:
+  html_notebook:
+    code_folding: show
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+---
+
+
+# Control Flow {.tabset .tabset-fade .tabset-pills}
+
+If help is required for any of the following code and keywords type `?Control` in your console and refer to the vignette. 
+
+## Inline ifelse
+Most programming languages have `if` and `else` conditions that enable you to extend your workflow:
+```{r}
+# Usage:
+# ifelse(cond, if_true_expr, if_false_expr)
+```
+Here's a trivial example using the `floor(...)` function:
+```{r}
+# Create a numeric
+x <- 4.321
+# Floor function gives an integer lesser than or equal to 'x'
+ifelse( floor(x) == 4, x + 2, x * 2)
+```
+
+## if and else
+The more generic `if` and `else` conditional statements can execute compound statements:
+```{r}
+# Usage:
+# if(cond)    if_true_expr    else    if_false_expr
+```
+Here's the same example from above with `ceiling(...)` instead of `floor(...)` function:
+```{r}
+# Ceiling function gives an integer greater than or equal to 'x'
+if (ceiling(x) == 4) {
+    x + 2
+} else {
+    x * 2
+}
+```
+Here's a `nested if-else` condition that checks whether a number is **positive or negative** and **odd or even**:
+```{r}
+# Reads an input
+num <- as.numeric(readline("Enter a number? "))
+# Nested if-else
+if (num > 0) {
+    cat("The number is greater than 0 ")
+    if (num %% 2 == 0) {
+        cat("and even")
+    } else {
+        cat("and odd")
+    }
+} else if (num < 0) {
+    cat("The number is less than 0 ")
+    if (num %% 2 == 0) {
+        cat("and even")
+    } else {
+        cat("and odd")
+    }
+} else {
+    cat("The number is 0 ")
+}
+```
+
+
+# Loops {.tabset .tabset-fade .tabset-pills}
+
+## for
+The most popular loop statement, `for`, uses iterators that may seem foreign to people from a Java or C++ background. Here's the usage for `for`:
+```{r}
+# Usage:
+# for(var in seq) expr
+```
+Here's a trivial example:
+```{r}
+# Prints 'Hello world!' 3 times
+for (i in c(1,2,3)) {
+    print("Hello world!")
+}
+```
+Here's another example using a iterator of a character vector:
+```{r}
+# Prints out every item in the character vector
+for (item in c("This","will","work")) {
+    message(item)
+}
+```
+Here's how you iterate through columns in a dataframe:
+```{r}
+# Creates a dataframe
+df <- data.frame(x = c(1,2,3),
+                 y = c("A","B","C"),
+                 stringsAsFactors = FALSE)
+# Structure of columns in the dataframe
+for (col in df) {
+    str(col)
+}
+```
+Here's how you iterate through rows:
+```{r}
+# Concatenates the columns
+for (i in 1:nrow(df)) {
+    row <- df[i,]
+    message(row)
+}
+```
+
+## Break and Next
+This section talks about keywords that are specfic to loops. The keywords do not return anything but transfer the control within a loop. `break` stops the any further iterations of the loop:
+```{r}
+# Encountering a break
+for (i in 1:10) {
+    if (i == 5) break
+    else print(sprintf("Message %d",i))
+}
+```
+`next` skips the current iterations of the loop, if encountered:
+```{r}
+# Encountering a next
+for (i in 1:10) {
+    if (i == 5) next
+    else message(sprintf("Message %d",i))
+}
+```
+
+## while-loop
+A `while` loop is another form of loop. This is the general usage:
+```{r}
+# Usage:
+# while(cond) expr
+```
+Here's a trivial example:
+```{r}
+# Create a variable
+x <- 0
+# Prints x for values less than or equal to 3
+while (x <= 3) {
+    message(x)
+    x <- x + 1
+}
+```
+
+## repeat-loop
+The `repeat` construct within R is rather odd but would still be familiar in some form to most programmers:
+```{r}
+# Usage:
+# repeat expr break next
+```
+It is imperative for the `repeat` loop to contain an update statement and a `break` (optionally, a `next` statement). Let's explore an example:
+```{r}
+# Create a variable
+x <- 0
+# repeat-loop
+repeat {
+    x <- x + 1                    # Update x
+    if (x == 10) {
+        break                       # Break if this condition encountered
+    } else if (x %% 2 == 1) {
+        message(0)
+    } else {
+        message(x)
+    }
+}
+```
+
+# Apply {.tabset .tabset-fade .tabset-pills}
+
+## apply
+
+## sapply
+
+## lapply
+
+
+# Functions {.tabset .tabset-fade .tabset-pills}
+
+## split
+
+## unlist
+
+## Generic functions
