@@ -182,9 +182,10 @@ titanic_df <- mutate(titanic_df, Fsize = SibSp + Parch + 1)
 # Display the result
 titanic_df
 ```
-What does our family size variable look like? To help us understand how it may relate to survival, let's plot it:
+What does our family size variable look like? To help us understand how it may relate to survival, let's plot it using the `geom_bar(...)` function:
 ```{r}
 # Use ggplot2 to visualize the relationship between family size & survival
+# geom_bar() plots a bar chart
 ggplot(titanic_df, aes(x = Fsize, fill = factor(Survived))) + 
     geom_bar(position = 'dodge') + 
     scale_x_continuous(breaks = 1:11)
@@ -205,9 +206,9 @@ titanic_df %>%
     group_by(Embarked, Pclass) %>%
     summarise(meanF = mean(Fare), medianF = median(Fare), maxF = max(Fare), Count = n())
 ```
-Well, visualizing numerical data is powerful tool in understanding the spread of the data and more importantly the outliers. Let's plot these values:
+Well, visualizing numerical data is powerful tool in understanding the spread of the data and more importantly the outliers. Let's plot these values using the `geom_boxplot(...)` function:
 ```{r}
-# Plot the data above
+# geom_boxplot() plots a boxplot
 ggplot(titanic_df, aes(x = Embarked, y = Fare, fill = factor(Pclass))) +
   geom_boxplot()
 ```
@@ -233,8 +234,9 @@ output <- melt(cor_df)
 # Display
 output
 ```
-Let's visualise the correlation:
+Let's visualise the correlation using the `geom_tile(...)` function:
 ```{r}
+# geom_tile() plots a correlation matrix
 ggplot(output, aes(x=Var1, y=Var2, fill=value)) + 
     geom_tile()
 ```
@@ -244,3 +246,23 @@ ggplot(output, aes(x=Var1, y=Var2, fill=value)) +
  - There seems to be a high positice correlation between `SibSp`, `Parch` and `Fsize`. What is the reason for this ?
  - There is a negative correlation between `SexN` and `Survival`. It suggests that one sex was more likely to survive. But which one is it ? Can you infer from `str(titanic_df)`
  - What other things can you see ?
+
+## Investigation V
+**Does the `Fare` follow a normal distribution ?**
+
+Most random variables in nature follow a normal distribution. Let's find out density plot of the `Fare` variable using the `geom_density(...)` function:
+```{r}
+# geom_density() plots a density plot
+ggplot(titanic_df, aes(x = Fare)) + geom_density()
+```
+Here's a some code to get the density values which uses all the tables operations we learnt so far. Make sure to experiment with every line in the code below:
+```{r}
+density_values <- titanic_df %>%                    
+    group_by(Fare) %>%                               # Groups the data by Fare
+    summarise(Frequency = n()) %>%                   # Generetes frequency of Fare
+    mutate(Density = Frequency/sum(Frequency)) %>%   # Creates a column Density
+    select(Fare, Density)                                  # Outputs the Density column only
+# Display density_values
+density_values
+
+```
