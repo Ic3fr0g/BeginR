@@ -7,7 +7,6 @@ Learn the basics of R
 - [Session 3](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-3.html) - Summary statistics, Factors, Data Frames and Lists
 - [Session 4](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-4.nb.html) - EDA and Table Operations
 - [Session 5](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-5.nb.html) - Control flow, loops, functions, apply
-- [Session 6](http://htmlpreview.github.io/?https://github.com/Ic3fr0g/BeginR/blob/master/Code/BeginR-6.nb.html)[WIP] - Correlation and Regression
 
 ## Prerequisites
 Install R and RStudio:
