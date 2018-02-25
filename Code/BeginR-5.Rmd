@@ -182,19 +182,54 @@ repeat {
 }
 ```
 
-# Apply {.tabset .tabset-fade .tabset-pills}
-
-## apply
-
-## sapply
-
-## lapply
-
 
 # Functions {.tabset .tabset-fade .tabset-pills}
 
-## split
+## Syntax
+Functions can be built-in or user-defined. In this section we explore the syntax for user-defined functions:
+```{r}
+# Usage:
+# function-name <- function(x) {does-something-here}
+# Function to calculate the sum of first n numbers
+first_n <- function(n) {
+    sum_x = 0
+    for (x in 1:n) {
+        sum_x = sum_x + x
+    }
+    sum_x
+}
+# Function call
+first_n(10)
+```
 
-## unlist
+## Recall
+`Recall(...)` enables us to create recursive functions:
+```{r}
+# A recursive function
+sum_of_first_n <- function(n) {
+    if (n == 1) 1 else n + Recall(n - 1)
+}
+# Function call
+sum_of_first_n(10)
+```
 
-## Generic functions
+
+# Apply {.tabset .tabset-fade .tabset-pills}
+
+## apply
+Very often we have to apply functions on dataframes and other types of data structures. The `apply(...)` function let's us iteratively access the elements within a datatype and then perform some function on it. Let's explore an example wherein we have to fetch the marks obtained by the students for a 50 mark exam:
+```{r}
+# Usage:
+# apply(X, MARGIN, FUN)
+# Create a dataframe
+marks_percentage <- data.frame(names = c("Tom", "Dick", "John", "Abby"),
+                               math = c(0.88, 0.81, 0.67, 0.95),
+                               science = c(0.88, 0.79, 0.57, 0.89))
+# apply function
+marks_obtained <- apply(marks_percentage[,2:3], 
+                        2,
+                        function(x) {
+                            x * 50
+                        })
+marks_obtained
+```

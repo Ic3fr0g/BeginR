@@ -11,7 +11,7 @@
 
 <meta name="author" content="Ic3fr0g" />
 
-<meta name="date" content="2018-02-18" />
+<meta name="date" content="2018-02-25" />
 
 <title>Control flow, loops, apply and functions</title>
 
@@ -167,7 +167,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Control flow, loops, apply and functions</h1>
 <h4 class="author"><em>Ic3fr0g</em></h4>
-<h4 class="date"><em>2018-02-18</em></h4>
+<h4 class="date"><em>2018-02-25</em></h4>
 
 </div>
 
@@ -183,15 +183,12 @@ $(document).ready(function () {
 <li><a href="#while-loop"><span class="toc-section-number">2.3</span> while-loop</a></li>
 <li><a href="#repeat-loop"><span class="toc-section-number">2.4</span> repeat-loop</a></li>
 </ul></li>
-<li><a href="#apply"><span class="toc-section-number">3</span> Apply</a><ul>
-<li><a href="#apply-1"><span class="toc-section-number">3.1</span> apply</a></li>
-<li><a href="#sapply"><span class="toc-section-number">3.2</span> sapply</a></li>
-<li><a href="#lapply"><span class="toc-section-number">3.3</span> lapply</a></li>
+<li><a href="#functions"><span class="toc-section-number">3</span> Functions</a><ul>
+<li><a href="#syntax"><span class="toc-section-number">3.1</span> Syntax</a></li>
+<li><a href="#recall"><span class="toc-section-number">3.2</span> Recall</a></li>
 </ul></li>
-<li><a href="#functions"><span class="toc-section-number">4</span> Functions</a><ul>
-<li><a href="#split"><span class="toc-section-number">4.1</span> split</a></li>
-<li><a href="#unlist"><span class="toc-section-number">4.2</span> unlist</a></li>
-<li><a href="#generic-functions"><span class="toc-section-number">4.3</span> Generic functions</a></li>
+<li><a href="#apply"><span class="toc-section-number">4</span> Apply</a><ul>
+<li><a href="#apply-1"><span class="toc-section-number">4.1</span> apply</a></li>
 </ul></li>
 </ul>
 </div>
@@ -369,28 +366,60 @@ x &lt;-<span class="st"> </span><span class="dv">0</span>
 <pre><code>## 0</code></pre>
 </div>
 </div>
-<div id="apply" class="section level1 tabset tabset-fade tabset-pills">
-<h1><span class="header-section-number">3</span> Apply</h1>
-<div id="apply-1" class="section level2">
-<h2><span class="header-section-number">3.1</span> apply</h2>
-</div>
-<div id="sapply" class="section level2">
-<h2><span class="header-section-number">3.2</span> sapply</h2>
-</div>
-<div id="lapply" class="section level2">
-<h2><span class="header-section-number">3.3</span> lapply</h2>
-</div>
-</div>
 <div id="functions" class="section level1 tabset tabset-fade tabset-pills">
-<h1><span class="header-section-number">4</span> Functions</h1>
-<div id="split" class="section level2">
-<h2><span class="header-section-number">4.1</span> split</h2>
+<h1><span class="header-section-number">3</span> Functions</h1>
+<div id="syntax" class="section level2">
+<h2><span class="header-section-number">3.1</span> Syntax</h2>
+<p>Functions can be built-in or user-defined. In this section we explore the syntax for user-defined functions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Usage:</span>
+<span class="co"># function-name &lt;- function(x) {does-something-here}</span>
+<span class="co"># Function to calculate the sum of first n numbers</span>
+first_n &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+    sum_x =<span class="st"> </span><span class="dv">0</span>
+    <span class="cf">for</span> (x <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {
+        sum_x =<span class="st"> </span>sum_x <span class="op">+</span><span class="st"> </span>x
+    }
+    sum_x
+}
+<span class="co"># Function call</span>
+<span class="kw">first_n</span>(<span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 55</code></pre>
 </div>
-<div id="unlist" class="section level2">
-<h2><span class="header-section-number">4.2</span> unlist</h2>
+<div id="recall" class="section level2">
+<h2><span class="header-section-number">3.2</span> Recall</h2>
+<p><code>Recall(...)</code> enables us to create recursive functions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A recursive function</span>
+sum_of_first_n &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+    <span class="cf">if</span> (n <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="dv">1</span> <span class="cf">else</span> n <span class="op">+</span><span class="st"> </span><span class="kw">Recall</span>(n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+}
+<span class="co"># Function call</span>
+<span class="kw">sum_of_first_n</span>(<span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 55</code></pre>
 </div>
-<div id="generic-functions" class="section level2">
-<h2><span class="header-section-number">4.3</span> Generic functions</h2>
+</div>
+<div id="apply" class="section level1 tabset tabset-fade tabset-pills">
+<h1><span class="header-section-number">4</span> Apply</h1>
+<div id="apply-1" class="section level2">
+<h2><span class="header-section-number">4.1</span> apply</h2>
+<p>Very often we have to apply functions on dataframes and other types of data structures. The <code>apply(...)</code> function let’s us iteratively access the elements within a datatype and then perform some function on it. Let’s explore an example wherein we have to fetch the marks obtained by the students for a 50 mark exam:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Usage:</span>
+<span class="co"># apply(X, MARGIN, FUN)</span>
+<span class="co"># Create a dataframe</span>
+marks_percentage &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">names =</span> <span class="kw">c</span>(<span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Dick&quot;</span>, <span class="st">&quot;John&quot;</span>, <span class="st">&quot;Abby&quot;</span>),
+                               <span class="dt">math =</span> <span class="kw">c</span>(<span class="fl">0.88</span>, <span class="fl">0.81</span>, <span class="fl">0.67</span>, <span class="fl">0.95</span>),
+                               <span class="dt">science =</span> <span class="kw">c</span>(<span class="fl">0.88</span>, <span class="fl">0.79</span>, <span class="fl">0.57</span>, <span class="fl">0.89</span>))
+<span class="co"># apply function</span>
+marks_obtained &lt;-<span class="st"> </span><span class="kw">apply</span>(marks_percentage[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], 
+                        <span class="dv">2</span>,
+                        <span class="cf">function</span>(x) {
+                            x <span class="op">*</span><span class="st"> </span><span class="dv">50</span>
+                        })
+marks_obtained</code></pre></div>
+<pre><code>##      math science
+## [1,] 44.0    44.0
+## [2,] 40.5    39.5
+## [3,] 33.5    28.5
+## [4,] 47.5    44.5</code></pre>
 </div>
 </div>
 
